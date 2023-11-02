@@ -1,27 +1,43 @@
-# React + TypeScript + Vite
+# 토스트 알림을 선언적으로 다루기
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+원하는 string을 useToast 커스텀 훅을 사용해 쉽게 띄울 수 있는 방법을 고민하고 구현했습니다.
 
-Currently, two official plugins are available:
+## 실행 예시
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 사용 방법
 
-## Expanding the ESLint configuration
+App을 Provider로 감쌉니다.
+store는 redux의 스토어를 의미합니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```tsx
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+toast를 띄워야하는 곳에 ToastContainer를 배치합니다.
+
+그리고 toast를 띄워야 하는 상황에서 `useToast`를 호출하여 사용합니다.
+
+```tsx
+function App() {
+  const toast = useToast();
+
+  const showToast = () => {
+    toast('토스트를 만들었습니다 🍞'); // like this
+  };
+
+  return (
+    <>
+      <main className="main">
+        <button className="alert-toast-button" onClick={showToast}>
+          토스트 알림 띄우기
+        </button>
+      </main>
+      <ToastContainer />
+    </>
+  );
+}
+```
