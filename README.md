@@ -4,6 +4,8 @@
 
 ## 실행 예시
 
+![Nov-02-2023 16-53-34](https://github.com/jhsung23/toast-with-reduxtoolkit/assets/69228045/35ab0b70-75bb-49de-a6b8-87025862e514)
+
 ## 사용 방법
 
 App을 Provider로 감쌉니다.
